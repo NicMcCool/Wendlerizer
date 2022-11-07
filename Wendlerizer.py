@@ -24,7 +24,7 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import (BooleanField, IntegerField, RadioField, StringField,
                      SubmitField)
-from wtforms.validators import Required, NoneOf
+from wtforms.validators import DataRequired, NoneOf
 
 from barbell import (Lift, WendlerSomething, WendlerDeloadSomething,
                      JokerSomething, FirstSetLastSomething, AccessoryLift,
@@ -37,21 +37,21 @@ bootstrap = Bootstrap(app)
 
 # Flask Parameters
 CLIENT_SIDE_URL = "http://127.0.0.1"
-PORT = 8080
+PORT = 8282
 
 PROJECT_DIR = os.path.dirname(__file__)
 
 
 class LiftForm(Form):
     """Form for getting lift 1RMs."""
-    name = StringField("Name", validators=[Required()])
+    name = StringField("Name", validators=[DataRequired()])
     squat = IntegerField("Squat")
     press = IntegerField("Press")
     bench_press = IntegerField("Bench Press")
     deadlift = IntegerField("Deadlift")
-    units = RadioField("Units", validators=[Required()], choices=[
+    units = RadioField("Units", validators=[DataRequired()], choices=[
         ("pounds", "Pounds"), ("kilograms", "Kilograms")], default="pounds")
-    bar_type = RadioField("Barbell size", validators=[Required()], choices=[
+    bar_type = RadioField("Barbell size", validators=[DataRequired()], choices=[
         (45.0, "Standard barbell"), (33.0, "Women's barbell")], default=45.0,
         coerce=float)
     light =  BooleanField("Make small jumps?")
@@ -64,19 +64,19 @@ class AdvancedLiftForm(Form):
         choices=[("maxes", "Generate program based on 1 rep maxes"),
                  ("tmaxes", "Generate a program based on existing training "
                   "maxes")], default="maxes")
-    name = StringField("Name", validators=[Required()])
+    name = StringField("Name", validators=[DataRequired()])
     squat = IntegerField("Squat")
     press = IntegerField("Press")
     bench_press = IntegerField("Bench Press")
     deadlift = IntegerField("Deadlift")
-    units = RadioField("Units", validators=[Required()], choices=[
+    units = RadioField("Units", validators=[DataRequired()], choices=[
         ("pounds", "Pounds"), ("kilograms", "Kilograms")], default="pounds")
-    bar_type = RadioField("Barbell size", validators=[Required()], choices=[
+    bar_type = RadioField("Barbell size", validators=[DataRequired()], choices=[
         (45.0, "Standard barbell"), (33.0, "Women's barbell")], default=45.0,
         coerce=float)
     light =  BooleanField("Make small jumps?")
     program_length = IntegerField("Number of Cycles", default=1,
-                                  validators=[Required()])
+                                  validators=[DataRequired()])
     submit = SubmitField("Get Wendlerized")
 
 

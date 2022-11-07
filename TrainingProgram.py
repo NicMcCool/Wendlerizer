@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 
-import readline
-
+from pyreadline3 import Readline
+readline = Readline()
 class TrainingProgram(object):
     '''Represents a complete lifting program, with methods for outputting
     it nicely.
